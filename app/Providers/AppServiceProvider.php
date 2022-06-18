@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Testing\TestResponse;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        TestResponse::macro('assertData', function ($json) {
+            $this->assertJson([
+                'data' => $json,
+            ]);
+
+            return $this;
+        });
+        TestResponse::macro('assertDataStructure', function ($structure) {
+            $this->assertJsonStructure([
+                'data' => $structure,
+            ]);
+
+            return $this;
+        });
     }
 }
