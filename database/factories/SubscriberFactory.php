@@ -14,7 +14,7 @@ class SubscriberFactory extends Factory
     {
         return [
             'name'       => $this->faker->name(),
-            'email'      => $this->faker->unique()->safeEmail(),
+            'email'      => $this->faker->unique()->freeEmail(),
             'state'      => $this->faker->randomElement(Subscriber::$default_states),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
