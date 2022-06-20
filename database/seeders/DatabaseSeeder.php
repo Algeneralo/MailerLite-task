@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        SubscriberFactory::new()->count(10)->create();
+        SubscriberFactory::new()->count(50)->create();
     }
 }

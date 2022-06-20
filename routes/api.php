@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SubscribersController;
+use App\Http\Controllers\API\SubscribersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +15,5 @@ use App\Http\Controllers\SubscribersController;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('subscribers', SubscribersController::class)->only('index', 'show', 'store');
+    Route::apiResource('subscribers', SubscribersController::class)->only('index', 'show', 'store', 'update');
 });
