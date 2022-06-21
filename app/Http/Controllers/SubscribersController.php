@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Field;
 use App\Models\Subscriber;
-use App\Http\Resources\SubscriberResource;
-use App\Http\Requests\StoreSubscriberRequest;
 
 class SubscribersController extends Controller
 {
     public function index()
     {
-        $subscribers = Subscriber::paginate();
-
-        return SubscriberResource::collection($subscribers);
+        return view('subscriber.index');
     }
 
-    public function store(StoreSubscriberRequest $request)
+    public function create()
     {
-        $subscriber = Subscriber::create($request->validated());
-
-        return new SubscriberResource($subscriber);
+        return view('subscriber.create', [
+            'states'      => Subscriber::$default_states,
+            'field_types' => Field::$default_types,
+        ]);
     }
 
-    public function show(Subscriber $subscriber)
+    public function edit(Subscriber $subscriber)
     {
-        return new SubscriberResource($subscriber);
+        return view('subscriber.edit', [
+            'subscriber'  => $subscriber,
+            'states'      => Subscriber::$default_states,
+            'fields'      => $subscriber->fields()->select(['title', 'type'])->get()->toArray(),
+            'field_types' => Field::$default_types,
+        ]);
     }
+
+
 }
